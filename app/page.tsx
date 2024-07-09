@@ -1,9 +1,10 @@
 import UsersList from "@/components/users-list";
 import { UserApiResponse } from "@/lib/types";
-import { apiUrl } from "@/lib/utils";
 
 export default async function Home() {
-  const response = await fetch(apiUrl("users"));
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_REGRES_API_BASE_URL}/users`
+  );
   const users = (await response.json()) as UserApiResponse;
 
   return (

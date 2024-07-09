@@ -26,7 +26,11 @@ export default function UsersList({ users }: UsersListProps) {
   async function handleLoadMore() {
     setLoading(true);
 
-    const response = await fetch(apiUrl(`users?page=${currentPage + 1}`));
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_REGRES_API_BASE_URL}/users?page=${
+        currentPage + 1
+      }`
+    );
 
     const { data, page, total_pages } =
       (await response.json()) as UserApiResponse;
