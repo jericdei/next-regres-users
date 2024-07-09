@@ -1,17 +1,12 @@
-import UsersList from "@/components/users-list";
-import { UserApiResponse } from "@/lib/types";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default async function Home() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_REGRES_API_BASE_URL}/users`
-  );
-  const users = (await response.json()) as UserApiResponse;
-
+export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col items-center py-12 lg:p-24 gap-y-8">
-      <h1 className="font-bold text-3xl">Users</h1>
-
-      <UsersList users={users} />
+    <main className="min-h-screen grid place-items-center">
+      <Link href="/users">
+        <Button>Go to the users page</Button>
+      </Link>
     </main>
   );
 }
