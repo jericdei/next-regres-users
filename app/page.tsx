@@ -6,7 +6,7 @@ export default async function Home() {
   const users = (await response.json()) as UserApiResponse;
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 gap-y-8">
+    <main className="flex min-h-screen flex-col items-center py-12 lg:p-24 gap-y-8">
       <h1 className="font-bold text-3xl">Users</h1>
 
       <UsersList users={users} />
