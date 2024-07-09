@@ -7,7 +7,6 @@ import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { User, UserApiResponse } from "@/lib/types";
 import { useToast } from "@/components/ui/use-toast";
-import { apiUrl } from "@/lib/utils";
 
 type UsersListProps = {
   users: UserApiResponse;
