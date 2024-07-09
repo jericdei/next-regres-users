@@ -1,4 +1,5 @@
 import { UserApiResponse } from "@/lib/types";
+import { sleep } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 const baseUrl = process.env.REGRES_API_BASE_URL;
@@ -9,6 +10,7 @@ const baseUrl = process.env.REGRES_API_BASE_URL;
 function getCompleteUrl(path: string = "", params?: URLSearchParams) {
   const url = new URL(`${baseUrl}/${path}`);
 
+  // Append params if there is any
   if (params && params.size > 0) {
     url.search = params.toString();
   }

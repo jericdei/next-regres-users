@@ -28,6 +28,7 @@ export default function UsersList({ users }: UsersListProps) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/users?page=${currentPage + 1}`
     );
+
     const { data, page, total_pages } =
       (await response.json()) as UserApiResponse;
 
@@ -73,8 +74,14 @@ export default function UsersList({ users }: UsersListProps) {
       </div>
 
       <Button disabled={loading || buttonDisabled} onClick={handleLoadMore}>
-        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {loading ? "Loading.." : "Load More"}
+        {loading ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <span>Loading...</span>
+          </>
+        ) : (
+          <span>Load More</span>
+        )}
       </Button>
     </>
   );
