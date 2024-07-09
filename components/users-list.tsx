@@ -55,7 +55,7 @@ export default function UsersList({ users }: UsersListProps) {
           <Card key={user.id}>
             <CardHeader className="items-center gap-y-2">
               <Image
-                className="rounded-full w-auto h-auto"
+                className="rounded-full aspect-square object-cover"
                 src={user.avatar}
                 alt={getFullName(user)}
                 width={64}
