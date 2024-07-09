@@ -18,6 +18,7 @@ export default function UsersList({ users }: UsersListProps) {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(users.page);
   const [userList, setUserList] = useState(users.data);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const getFullName = (user: User) => `${user.first_name} ${user.last_name}`;
 
@@ -27,14 +28,16 @@ export default function UsersList({ users }: UsersListProps) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/users?page=${currentPage + 1}`
     );
-    const { data, page } = (await response.json()) as UserApiResponse;
+    const { data, page, total_pages } =
+      (await response.json()) as UserApiResponse;
 
-    if (data.length === 0) {
+    if (data.length === 0 || page === total_pages) {
       toast({
         title: "No more data!",
         description: "This is the last page.",
-        variant: "destructive",
       });
+
+      setButtonDisabled(true);
     }
 
     setUserList((oldValue) => [...oldValue, ...data]);
@@ -69,7 +72,7 @@ export default function UsersList({ users }: UsersListProps) {
         ))}
       </div>
 
-      <Button disabled={loading} onClick={handleLoadMore}>
+      <Button disabled={loading || buttonDisabled} onClick={handleLoadMore}>
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         {loading ? "Loading.." : "Load More"}
       </Button>
