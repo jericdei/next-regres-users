@@ -1,10 +1,17 @@
 import UsersList from "@/components/users-list";
 import { UserApiResponse } from "@/lib/types";
+import { InferGetServerSidePropsType } from "next";
 
-export default async function Home() {
+export async function getServerSideProps() {
   const response = await fetch(process.env.BASE_URL + "/api/users");
   const users = (await response.json()) as UserApiResponse;
 
+  return { props: { users } };
+}
+
+export default async function Home({
+  users,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <main className="flex min-h-screen flex-col items-center py-12 lg:p-24 gap-y-8">
       <h1 className="font-bold text-3xl">Users</h1>
