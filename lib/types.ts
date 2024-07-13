@@ -6,6 +6,10 @@ export type User = {
   avatar: string;
 };
 
+export type UserApiParams = Record<string, any> & {
+  page?: number;
+};
+
 export type UserApiResponse = {
   page: number;
   per_page: number;

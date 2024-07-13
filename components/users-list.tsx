@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { User, UserApiResponse } from "@/lib/types";
 import { useToast } from "@/components/ui/use-toast";
+import { getUsers } from "@/api/user";
 
 type UsersListProps = {
   users: UserApiResponse;
@@ -25,14 +26,9 @@ export default function UsersList({ users }: UsersListProps) {
   async function handleLoadMore() {
     setLoading(true);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_REGRES_API_BASE_URL}/users?page=${
-        currentPage + 1
-      }`
-    );
-
-    const { data, page, total_pages } =
-      (await response.json()) as UserApiResponse;
+    const { data, page, total_pages } = await getUsers({
+      page: currentPage + 1,
+    });
 
     if (data.length === 0 || page === total_pages) {
       toast({
