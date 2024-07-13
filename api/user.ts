@@ -5,7 +5,7 @@ export async function getUsers(
 ): Promise<UserApiResponse> {
   const urlParams = new URLSearchParams(params);
   const url = `${process.env
-    .NEXT_PUBLIC_REGRES_API_BASE_URL!}/users?${urlParams.toString()}`;
+    .NEXT_PUBLIC_REQRES_API_BASE_URL!}/users?${urlParams.toString()}`;
 
   const response = await fetch(url);
 
