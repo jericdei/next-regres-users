@@ -10,8 +10,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Next Regres Users",
-  description: "A simple user list from Regres API",
+  title: "Next Reqres Users",
+  description: "A simple user list from Reqres API",
 };
 
 export default function RootLayout({
